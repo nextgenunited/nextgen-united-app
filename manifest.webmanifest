@@ -1,0 +1,18 @@
+{
+  "name": "Nextgen United",
+  "short_name": "Nextgen United",
+  "description": "Nextgen United — equipa, estatísticas, jogos, torneios e presenças.",
+  "lang": "pt-PT",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [
+    {
+      "src": "logo.png.png",
+      "type": "image/png"
+    }
+  ]
+}
