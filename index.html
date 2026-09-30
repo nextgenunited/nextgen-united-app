@@ -3742,6 +3742,21 @@ nav button:hover {
 #vpgModalStatsBlock .stat-name{font-size:25px!important;color:#f4f4f4!important;font-weight:800!important;}
 #vpgModalStatsBlock .stat-val{font-size:34px!important;font-weight:900!important;}
 </style>
+
+
+
+<style id="sombra-ze-presencas-orange-final">
+/* Presenças: Sombra e Zé dos Peixes = mesma laranja dos defesas */
+#attendancePage .attendance-player[data-player="SOMBRA"],
+#attendancePage .attendance-player[data-player="ZE DOS PEIXES"],
+#attendancePage .player-attendance[data-player="SOMBRA"],
+#attendancePage .player-attendance[data-player="ZE DOS PEIXES"],
+#attendancePage [data-player="SOMBRA"],
+#attendancePage [data-player="ZE DOS PEIXES"] {
+  color: #ff6a00 !important;
+}
+</style>
+
 </head>
 
 
@@ -5891,6 +5906,26 @@ service cloud.firestore {
             yellow: 0
         },
 
+        "SOMBRA": {
+            number: "30",
+            position: "DEF · DEFESA",
+            photo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23101010'/%3E%3Ctext x='200' y='270' text-anchor='middle' fill='%23ff6a00' font-family='Arial' font-size='120' font-weight='900'%3ES%3C/text%3E%3C/svg%3E",
+            games: 0,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "ZE DOS PEIXES": {
+            number: "4",
+            position: "DEF · DEFESA",
+            photo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23101010'/%3E%3Ctext x='200' y='250' text-anchor='middle' fill='%23ff6a00' font-family='Arial' font-size='72' font-weight='900'%3EZP%3C/text%3E%3C/svg%3E",
+            games: 0,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
         "DUDA": {
             number: "8",
             position: "MC · MÉDIO",
@@ -5983,27 +6018,7 @@ service cloud.firestore {
             role: "CAPITÃO"
         },
 
-        "SOMBRA": {
-            number: "30",
-            position: "DEF · DEFESA",
-            photo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23101010'/%3E%3Ctext x='200' y='270' text-anchor='middle' fill='%23ff6a00' font-family='Arial' font-size='120' font-weight='900'%3ES%3C/text%3E%3C/svg%3E",
-            games: 0,
-            goals: 0,
-            assists: 0,
-            yellow: 0
-        },
-
-        "ZE DOS PEIXES": {
-            number: "4",
-            position: "DEF · DEFESA",
-            photo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23101010'/%3E%3Ctext x='200' y='250' text-anchor='middle' fill='%23ff6a00' font-family='Arial' font-size='72' font-weight='900'%3EZP%3C/text%3E%3C/svg%3E",
-            games: 0,
-            goals: 0,
-            assists: 0,
-            yellow: 0
-        }
-
-    };
+};
 
 
     /* =========================
@@ -6737,7 +6752,8 @@ window.nextgenAdminEnter=enterAdmin;if(document.readyState==='loading')document.
   function voteYearCode(){return String(new Date().getFullYear()).slice(-2);}
   function votePlayers(){return typeof playersData!=='undefined'?Object.keys(playersData):[];}
   function votePlayerByCode(code){
-    const wanted=String(code||'').trim();
+    const raw=String(code==null?'':code).trim();
+    const wanted=raw==='426'?'0426':raw;
     const fixedCodes={
       '3026':'SOMBRA',
       '0426':'ZE DOS PEIXES'
@@ -7023,7 +7039,7 @@ modal.classList.add('open');modal.setAttribute('aria-hidden','false');};
     - Golos, assistências, amarelos e vermelhos são somados por jogador.
     - Clean sheets só contam para GR e apenas quando o campo cleanSheet=true.
   */
-  const NEXTGEN_BASE_STATS = [{"key": "NIGHTFACE", "pos": "GR", "games": 4, "goals": 4, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MOSCA", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MJ_", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "BANJAQUI", "pos": "DD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "LOURO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "PEREIRA", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DIOGO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "SALES", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DUDA", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "RAFAEL", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "WOLF", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "CV", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "ROGERIO", "pos": "MD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "PEDRO", "pos": "ME", "games": 4, "goals": 1, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DOLLY", "pos": "ME", "games": 4, "goals": 1, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MARTINS", "pos": "PL", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "TEDDY", "pos": "PL", "games": 4, "goals": 3, "assists": 1, "yellow": 2, "red": 0, "cleanSheets": 0}];
+  const NEXTGEN_BASE_STATS = [{"key": "NIGHTFACE", "pos": "GR", "games": 4, "goals": 4, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MOSCA", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MJ_", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "BANJAQUI", "pos": "DD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "LOURO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "PEREIRA", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "SOMBRA", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "ZE DOS PEIXES", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DIOGO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "SALES", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DUDA", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "RAFAEL", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "WOLF", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "CV", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "ROGERIO", "pos": "MD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "PEDRO", "pos": "ME", "games": 4, "goals": 1, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DOLLY", "pos": "ME", "games": 4, "goals": 1, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MARTINS", "pos": "PL", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "TEDDY", "pos": "PL", "games": 4, "goals": 3, "assists": 1, "yellow": 2, "red": 0, "cleanSheets": 0}];
 
   const XI_VPG = ["TEDDY","DIOGO","LOURO","DUDA","WOLF","PEDRO","DOLLY","MARTINS"];
   const NEXTGEN_MATCH_STATS = [
