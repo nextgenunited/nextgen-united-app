@@ -6742,7 +6742,10 @@ window.nextgenAdminEnter=enterAdmin;if(document.readyState==='loading')document.
       '3026':'SOMBRA',
       '0426':'ZE DOS PEIXES'
     };
-    if(fixedCodes[wanted] && playersData[fixedCodes[wanted]]) return fixedCodes[wanted];
+    // Estes dois códigos são válidos diretamente, tal como os restantes,
+    // sem depender da comparação do nome/chave de playersData.
+    if(wanted==='3026') return 'SOMBRA';
+    if(wanted==='0426') return 'ZE DOS PEIXES';
     return votePlayers().find(function(name){
       const p=playersData[name];
       if(!p||p.number===undefined)return false;
