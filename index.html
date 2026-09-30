@@ -4252,29 +4252,27 @@ nav button:hover {
 
                 <div
                     class="player-card defender"
-                    onclick="openPlayer('LOUPA')"
+                    onclick="openPlayer('SOMBRA')"
                 >
-
                     <div class="player-photo-box">
-                        <img
-                            class="player-photo"
-                            src="louppa.jpg"
-                            alt="LOUPPA"
-                        >
+                        <img class="player-photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23101010'/%3E%3Ctext x='200' y='270' text-anchor='middle' fill='%23ff6a00' font-family='Arial' font-size='120' font-weight='900'%3ES%3C/text%3E%3C/svg%3E" alt="SOMBRA">
                     </div>
-
-                    <div class="player-number">
-                        44
-                    </div>
-
-                    <div class="player-info">
-                        <h3>LOUPPA</h3>
-                        <p>DE</p>
-                    </div>
-
+                    <div class="player-number">30</div>
+                    <div class="player-info"><h3>SOMBRA</h3><p>DC</p></div>
                 </div>
 
-            </div>
+                <div
+                    class="player-card defender"
+                    onclick="openPlayer('ZE DOS PEIXES')"
+                >
+                    <div class="player-photo-box">
+                        <img class="player-photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23101010'/%3E%3Ctext x='200' y='250' text-anchor='middle' fill='%23ff6a00' font-family='Arial' font-size='72' font-weight='900'%3EZP%3C/text%3E%3C/svg%3E" alt="ZE DOS PEIXES">
+                    </div>
+                    <div class="player-number">4</div>
+                    <div class="player-info"><h3>ZE DOS PEIXES</h3><p>DC</p></div>
+                </div>
+
+</div>
 
         </div>
 
@@ -5231,7 +5229,7 @@ const FIREBASE_CONFIG = {
   function formatDate(date){return String(date.getDate()).padStart(2,'0')+'/'+String(date.getMonth()+1).padStart(2,'0');}
   function formatWeekLabel(){const end=new Date(attendanceWeekStart);end.setDate(end.getDate()+4);return 'TREINOS · '+formatDate(attendanceWeekStart)+' — '+formatDate(end);}
   function weekDocId(){return dateKey(attendanceWeekStart);}
-  function getPlayers(){if(typeof playersData!=='undefined')return Object.keys(playersData);return ['MOSCA','NIGHTFACE','MJ_','BANJAQUI','LOURO','DIOGO','SALES','DUDA','RAFAEL','WOLF','ROGERIO','PEDRO','DOLLY','MARTINS','TEDDY'];}
+  function getPlayers(){if(typeof playersData!=='undefined'){const order=['MOSCA','NIGHTFACE','MJ_','BANJAQUI','LOURO','DIOGO','SALES','PEREIRA','SOMBRA','ZE DOS PEIXES','DUDA','RAFAEL','WOLF','CV','ROGERIO','PEDRO','DOLLY','MARTINS','TEDDY'];return order.filter(name=>playersData[name]);}return ['MOSCA','NIGHTFACE','MJ_','BANJAQUI','LOURO','DIOGO','SALES','PEREIRA','SOMBRA','ZE DOS PEIXES','DUDA','RAFAEL','WOLF','CV','ROGERIO','PEDRO','DOLLY','MARTINS','TEDDY'];}
   function displayPlayerName(name){if(name==='MJ_')return 'MJ';if(name==='MARTINS')return 'MARTINS (P)';if(name==='TEDDY')return 'TEDDY (C)';return name;}
   function playerPosition(name){if(typeof playersData!=='undefined'&&playersData[name])return playersData[name].position;return '';}
   function currentStatus(player,date){const key=dateKey(date);return(attendanceData[key]&&attendanceData[key][player])||'empty';}
@@ -5893,16 +5891,6 @@ service cloud.firestore {
             yellow: 0
         },
 
-        "LOUPA": {
-            number: "44",
-            position: "DE · DEFESA",
-            photo: "louppa.jpg",
-            games: 0,
-            goals: 0,
-            assists: 0,
-            yellow: 0
-        },
-
         "DUDA": {
             number: "8",
             position: "MC · MÉDIO",
@@ -5993,6 +5981,26 @@ service cloud.firestore {
             assists: 1,
             yellow: 2,
             role: "CAPITÃO"
+        },
+
+        "SOMBRA": {
+            number: "30",
+            position: "DC · DEFESA CENTRAL",
+            photo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23101010'/%3E%3Ctext x='200' y='270' text-anchor='middle' fill='%23ff6a00' font-family='Arial' font-size='120' font-weight='900'%3ES%3C/text%3E%3C/svg%3E",
+            games: 0,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "ZE DOS PEIXES": {
+            number: "4",
+            position: "DC · DEFESA CENTRAL",
+            photo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23101010'/%3E%3Ctext x='200' y='250' text-anchor='middle' fill='%23ff6a00' font-family='Arial' font-size='72' font-weight='900'%3EZP%3C/text%3E%3C/svg%3E",
+            games: 0,
+            goals: 0,
+            assists: 0,
+            yellow: 0
         }
 
     };
@@ -6030,7 +6038,7 @@ service cloud.firestore {
 
         document.getElementById(
             "modalPlayerName"
-        ).textContent = playerName === "LOUPA" ? "LOUPPA" : playerName;
+        ).textContent = playerName;
 
 
         document.getElementById(
@@ -6727,7 +6735,7 @@ window.nextgenAdminEnter=enterAdmin;if(document.readyState==='loading')document.
   function voteTargetDate(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+1);return voteDateKey(d);}
   function voteFormatDate(date){return String(date.getDate()).padStart(2,'0')+'/'+String(date.getMonth()+1).padStart(2,'0');}
   function voteYearCode(){return String(new Date().getFullYear()).slice(-2);}
-  function votePlayers(){return typeof playersData!=='undefined'?Object.keys(playersData):[];}
+  function votePlayers(){if(typeof playersData!=='undefined'){const order=['MOSCA','NIGHTFACE','MJ_','BANJAQUI','LOURO','DIOGO','SALES','PEREIRA','SOMBRA','ZE DOS PEIXES','DUDA','RAFAEL','WOLF','CV','ROGERIO','PEDRO','DOLLY','MARTINS','TEDDY'];return order.filter(name=>playersData[name]);}return [];}
   function votePlayerByCode(code){
     const wanted=String(code||'').trim();
     return votePlayers().find(function(name){
@@ -6957,11 +6965,11 @@ window.nextgenAdminEnter=enterAdmin;if(document.readyState==='loading')document.
 
 <script id="vpg-history-script">
 (function(){
- const XI=['TEDDY','DIOGO','LOURO','LOUPA','DUDA','WOLF','PEDRO','DOLLY','MARTINS'];
+ const XI=['TEDDY','DIOGO','LOURO','DUDA','WOLF','PEDRO','DOLLY','MARTINS'];
  const data={
-  1:{title:'JOGO 01 · VS REFINED MARTINS',away:'REFINED MARTINS',score:'1–1',result:'EMPATE',xi:['Teddy','Diogo','Louro','Louppa','Duda','Wolf','Pedro','Dolly','Martins'],events:[['home-goal','GOLO · 27\'','Martins'],['assist','ASSISTÊNCIA','Pedro'],['away-goal','GOLO ADVERSÁRIO · 90+1\'','Adversário']],stats:null,note:'Fase de grupos · Jogo 1 · Sem estatísticas individuais disponíveis.'},
-  2:{title:'JOGO 02 · VS THE VENOM',away:'THE VENOM',score:'1–1',result:'EMPATE',xi:['Teddy','Diogo','Louro','Louppa','Duda','Wolf','Pedro','Dolly','Martins'],events:[['home-goal','GOLO · 6\'','Martins'],['assist','ASSISTÊNCIA','Pedro'],['away-goal','GOLO ADVERSÁRIO · 69\'','Adversário']],stats:[['Posse de bola (%)','61','39'],['Remates','7','2'],['Golos esperados','1,44','0,81'],['Passes','210','112'],['Faltas cometidas','1','0'],['Cantos','4','0']],note:'Fase de grupos · Jogo 2.'},
-  3:{title:'JOGO 03 · VS AMEVORA XI',away:'AMEVORA XI',score:'2–0',result:'VITÓRIA',xi:['Teddy','Diogo','Louro','Louppa','Duda','Wolf','Pedro','Dolly','Martins'],events:[['home-goal','GOLO · 27\'','Pedro'],['assist','ASSISTÊNCIA','Martins'],['home-goal','GOLO · 54\'','Martins'],['assist','ASSISTÊNCIA','Louppa']],stats:[['Posse de bola (%)','49','51'],['Remates','6','3'],['Golos esperados','1,83','0,31'],['Passes','130','149'],['Faltas cometidas','1','1'],['Cantos','1','0']],note:'Fase de grupos · Jogo 3 · Clean sheet do Teddy.'},
+  1:{title:'JOGO 01 · VS REFINED MARTINS',away:'REFINED MARTINS',score:'1–1',result:'EMPATE',xi:['Teddy','Diogo','Louro','Duda','Wolf','Pedro','Dolly','Martins'],events:[['home-goal','GOLO · 27\'','Martins'],['assist','ASSISTÊNCIA','Pedro'],['away-goal','GOLO ADVERSÁRIO · 90+1\'','Adversário']],stats:null,note:'Fase de grupos · Jogo 1 · Sem estatísticas individuais disponíveis.'},
+  2:{title:'JOGO 02 · VS THE VENOM',away:'THE VENOM',score:'1–1',result:'EMPATE',xi:['Teddy','Diogo','Louro','Duda','Wolf','Pedro','Dolly','Martins'],events:[['home-goal','GOLO · 6\'','Martins'],['assist','ASSISTÊNCIA','Pedro'],['away-goal','GOLO ADVERSÁRIO · 69\'','Adversário']],stats:[['Posse de bola (%)','61','39'],['Remates','7','2'],['Golos esperados','1,44','0,81'],['Passes','210','112'],['Faltas cometidas','1','0'],['Cantos','4','0']],note:'Fase de grupos · Jogo 2.'},
+  3:{title:'JOGO 03 · VS AMEVORA XI',away:'AMEVORA XI',score:'2–0',result:'VITÓRIA',xi:['Teddy','Diogo','Louro','Duda','Wolf','Pedro','Dolly','Martins'],events:[['home-goal','GOLO · 27\'','Pedro'],['assist','ASSISTÊNCIA','Martins'],['home-goal','GOLO · 54\'','Martins'],['assist','ASSISTÊNCIA','Louppa']],stats:[['Posse de bola (%)','49','51'],['Remates','6','3'],['Golos esperados','1,83','0,31'],['Passes','130','149'],['Faltas cometidas','1','1'],['Cantos','1','0']],note:'Fase de grupos · Jogo 3 · Clean sheet do Teddy.'},
   4:{title:'OITAVOS DE FINAL · VS BUSHIDO',away:'BUSHIDO',score:'0–2',result:'DERROTA',events:[['away-goal','GOLO ADVERSÁRIO','Bushido · 37\''],['away-goal','GOLO ADVERSÁRIO','Bushido · 45\'']],stats:null,note:'Oitavos de final · Sem estatísticas individuais disponíveis.'}
  };
  window.openVpgMatch=function(id){const m=data[id];const modal=document.getElementById('vpgMatchModal');if(!m||!modal)return;document.getElementById('vpgMatchTitle').textContent=m.title;document.getElementById('vpgModalScore').textContent=m.score;document.getElementById('vpgModalResult').textContent=m.result;document.getElementById('vpgModalAwayName').textContent=m.away;document.getElementById('vpgModalAwayVisual').textContent=m.away.split(' ').map(x=>x[0]).join('').slice(0,3);document.getElementById('vpgModalNote').textContent=m.note||'';document.getElementById('vpgModalXI').innerHTML=(m.xi||[]).map((p,i)=>'<div class="vpg-xi-player"><span>'+String(i+1).padStart(2,'0')+'</span><strong>'+p+'</strong></div>').join('');document.getElementById('vpgModalEvents').innerHTML=m.events.map(e=>'<div class="vpg-event '+e[0]+'"><b>'+e[1]+'</b><span>'+e[2]+'</span></div>').join('');const block=document.getElementById('vpgModalStatsBlock'),wrap=document.getElementById('vpgModalStats');
@@ -7007,9 +7015,9 @@ modal.classList.add('open');modal.setAttribute('aria-hidden','false');};
     - Golos, assistências, amarelos e vermelhos são somados por jogador.
     - Clean sheets só contam para GR e apenas quando o campo cleanSheet=true.
   */
-  const NEXTGEN_BASE_STATS = [{"key": "NIGHTFACE", "pos": "GR", "games": 4, "goals": 4, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MOSCA", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MJ_", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "BANJAQUI", "pos": "DD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "LOURO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "PEREIRA", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DIOGO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "SALES", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "LOUPA", "pos": "DE", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DUDA", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "RAFAEL", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "WOLF", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "CV", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "ROGERIO", "pos": "MD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "PEDRO", "pos": "ME", "games": 4, "goals": 1, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DOLLY", "pos": "ME", "games": 4, "goals": 1, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MARTINS", "pos": "PL", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "TEDDY", "pos": "PL", "games": 4, "goals": 3, "assists": 1, "yellow": 2, "red": 0, "cleanSheets": 0}];
+  const NEXTGEN_BASE_STATS = [{"key": "NIGHTFACE", "pos": "GR", "games": 4, "goals": 4, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MOSCA", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MJ_", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "BANJAQUI", "pos": "DD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "LOURO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "PEREIRA", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DIOGO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "SALES", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "SOMBRA", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "ZE DOS PEIXES", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DUDA", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "RAFAEL", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "WOLF", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "CV", "pos": "MC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "ROGERIO", "pos": "MD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "PEDRO", "pos": "ME", "games": 4, "goals": 1, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DOLLY", "pos": "ME", "games": 4, "goals": 1, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MARTINS", "pos": "PL", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "TEDDY", "pos": "PL", "games": 4, "goals": 3, "assists": 1, "yellow": 2, "red": 0, "cleanSheets": 0}];
 
-  const XI_VPG = ["TEDDY","DIOGO","LOURO","LOUPA","DUDA","WOLF","PEDRO","DOLLY","MARTINS"];
+  const XI_VPG = ["TEDDY","DIOGO","LOURO","DUDA","WOLF","PEDRO","DOLLY","MARTINS"];
   const NEXTGEN_MATCH_STATS = [
     {competition:'VPG',date:'2026-09-29',opponent:'Refined Martins',score:'1-1',startingXI:XI_VPG,players:{MARTINS:{goals:1},PEDRO:{assists:1}}},
     {competition:'VPG',date:'2026-09-29',opponent:'The Venom',score:'1-1',startingXI:XI_VPG,players:{MARTINS:{goals:1},PEDRO:{assists:1}}},
@@ -7022,7 +7030,7 @@ modal.classList.add('open');modal.setAttribute('aria-hidden','false');};
     'MJ_':'MJ',
     'MARTINS':'MARTINS (P)',
     'TEDDY':'TEDDY (C)',
-    'LOUPA':'LOUPPA'
+
   };
 
   function positionCode(pos){ return String(pos||'').split(/[ ·\s]/)[0] || ''; }
