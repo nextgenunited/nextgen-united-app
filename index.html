@@ -2123,13 +2123,13 @@ body.admin-locked [data-attendance-click], body.admin-locked .attendance-cell { 
 .attendance-player{transition:.2s ease;}
 </style>
 <style id="attendance-mohamed-cordeiro-match-midfielders">
-/* Mohamed e Cordeiro: exatamente o mesmo tratamento visual dos restantes médios */
+/* Mohamed e Danyllo: exatamente o mesmo tratamento visual dos restantes médios */
 #attendancePage .attendance-row.midfielder[data-player="MOHAMED"],
-#attendancePage .attendance-row.midfielder[data-player="CORDEIRO"] {
+#attendancePage .attendance-row.midfielder[data-player="DANYLLO"] {
   border-left-color:#1683ff !important;
 }
 #attendancePage .attendance-row.midfielder[data-player="MOHAMED"] .attendance-player,
-#attendancePage .attendance-row.midfielder[data-player="CORDEIRO"] .attendance-player {
+#attendancePage .attendance-row.midfielder[data-player="DANYLLO"] .attendance-player {
   color:#1683ff !important;
   font-weight:800 !important;
   white-space:nowrap !important;
@@ -3765,8 +3765,8 @@ nav button:hover {
 }
 </style>
 <style id="fix-presencas-mohamed-cordeiro">
-/* Corrige apenas o fundo preto indevido nas linhas de Mohamed e Cordeiro. */
-#attendanceBody tr[data-player="MOHAMED"] td:first-child, #attendanceBody tr[data-player="CORDEIRO"] td:first-child{background:transparent !important;}
+/* Corrige apenas o fundo preto indevido nas linhas de Mohamed e Danyllo. */
+#attendanceBody tr[data-player="MOHAMED"] td:first-child, #attendanceBody tr[data-player="DANYLLO"] td:first-child{background:transparent !important;}
 </style>
 </head>
 <body>
@@ -4073,15 +4073,15 @@ nav button:hover {
 <p>MC</p>
 </div>
 </div>
-<div class="player-card midfielder" onclick="openPlayer('CORDEIRO')">
+<div class="player-card midfielder" onclick="openPlayer('DANYLLO')">
 <div class="player-photo-box">
-<img alt="CORDEIRO" class="player-photo" src="cordeiro.jpg"/>
+<img alt="DANYLLO" class="player-photo" src="cordeiro.jpg"/>
 </div>
 <div class="player-number">
                         19
                     </div>
 <div class="player-info">
-<h3>CORDEIRO</h3>
+<h3>DANYLLO</h3>
 <p>MC</p>
 </div>
 </div>
@@ -4655,7 +4655,7 @@ const FIREBASE_CONFIG = {
   function formatDate(date){return String(date.getDate()).padStart(2,'0')+'/'+String(date.getMonth()+1).padStart(2,'0');}
   function formatWeekLabel(){const end=new Date(attendanceWeekStart);end.setDate(end.getDate()+4);return 'TREINOS · '+formatDate(attendanceWeekStart)+' — '+formatDate(end);}
   function weekDocId(){return dateKey(attendanceWeekStart);}
-  function getPlayers(){if(typeof playersData!=='undefined')return Object.keys(playersData).filter(function(name){return String(name).trim()!=='';});return ['MOSCA','NIGHTFACE','MJ_','PONTES','PEREIRA','BANJAQUI','LOURO','DIOGO','SALES','ZE DOS PEIXES','MOHAMED','CORDEIRO','SANTIAGO','ROGERIO','PEDRO','MARTINS','TEDDY'];}
+  function getPlayers(){if(typeof playersData!=='undefined')return Object.keys(playersData).filter(function(name){return String(name).trim()!=='';});return ['MOSCA','NIGHTFACE','MJ_','PONTES','PEREIRA','BANJAQUI','LOURO','DIOGO','SALES','ZE DOS PEIXES','MOHAMED','DANYLLO','SANTIAGO','ROGERIO','PEDRO','MARTINS','TEDDY'];}
   function displayPlayerName(name){if(name==='MJ_')return 'MJ';if(name==='MARTINS')return 'MARTINS (P)';if(name==='TEDDY')return 'TEDDY (C)';return name;}
   function playerPosition(name){if(typeof playersData!=='undefined'&&playersData[name])return playersData[name].position;return '';}
   function currentStatus(player,date){const key=dateKey(date);return(attendanceData[key]&&attendanceData[key][player])||'empty';}
@@ -5232,6 +5232,7 @@ service cloud.firestore {
             number: "99",
             code: "9926",
             position: "GR · GUARDA-REDES",
+            photo: "pontes.jpg",
             games: 0,
             goals: 0,
             assists: 0,
@@ -5313,16 +5314,18 @@ service cloud.firestore {
             number: "20",
             code: "2026",
             position: "MC · MÉDIO",
+            photo: "mohamed.jpg",
             games: 0,
             goals: 0,
             assists: 0,
             yellow: 0
         },
 
-        "CORDEIRO": {
+        "DANYLLO": {
             number: "19",
             code: "1926",
             position: "MC · MÉDIO",
+            photo: "cordeiro.jpg",
             games: 0,
             goals: 0,
             assists: 0,
@@ -5333,6 +5336,7 @@ service cloud.firestore {
             number: "18",
             code: "1826",
             position: "MD · MÉDIO",
+            photo: "santiago.jpg",
             games: 0,
             goals: 0,
             assists: 0,
@@ -6439,7 +6443,7 @@ modal.classList.add('open');modal.setAttribute('aria-hidden','false');};
     - Golos, assistências, amarelos e vermelhos são somados por jogador.
     - Clean sheets só contam para GR e apenas quando o campo cleanSheet=true.
   */
-  const NEXTGEN_BASE_STATS = [{"key": "NIGHTFACE", "pos": "GR", "games": 4, "goals": 4, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MOSCA", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MJ_", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "PONTES", "pos": "GR", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "BANJAQUI", "pos": "DD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "LOURO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "PEREIRA", "pos": "DE", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "FÁBIO", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "ZE DOS PEIXES", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DIOGO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "SALES", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "ROGERIO", "pos": "MD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "PEDRO", "pos": "ME", "games": 4, "goals": 1, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MOHAMED", "pos": "MC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "CORDEIRO", "pos": "MC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "SANTIAGO", "pos": "MD", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MARTINS", "pos": "PL", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "TEDDY", "pos": "PL", "games": 4, "goals": 3, "assists": 1, "yellow": 2, "red": 0, "cleanSheets": 0}];
+  const NEXTGEN_BASE_STATS = [{"key": "NIGHTFACE", "pos": "GR", "games": 4, "goals": 4, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MOSCA", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MJ_", "pos": "GR", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "PONTES", "pos": "GR", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "BANJAQUI", "pos": "DD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "LOURO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "PEREIRA", "pos": "DE", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "FÁBIO", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "ZE DOS PEIXES", "pos": "DC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DIOGO", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 1, "red": 0, "cleanSheets": 0}, {"key": "SALES", "pos": "DC", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "ROGERIO", "pos": "MD", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "PEDRO", "pos": "ME", "games": 4, "goals": 1, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MOHAMED", "pos": "MC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "DANYLLO", "pos": "MC", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "SANTIAGO", "pos": "MD", "games": 0, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "MARTINS", "pos": "PL", "games": 4, "goals": 0, "assists": 0, "yellow": 0, "red": 0, "cleanSheets": 0}, {"key": "TEDDY", "pos": "PL", "games": 4, "goals": 3, "assists": 1, "yellow": 2, "red": 0, "cleanSheets": 0}];
 
   const XI_VPG = ["TEDDY","DIOGO","LOURO","PEDRO","MARTINS"];
 
